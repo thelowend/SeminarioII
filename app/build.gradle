@@ -7,7 +7,7 @@ android {
     flavorDimensions "minSdkVersion"
 
     defaultConfig {
-        applicationId "com.google.firebase.quickstart.auth"
+        applicationId "com.google.prototipo.seminarioii.celiacos"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1

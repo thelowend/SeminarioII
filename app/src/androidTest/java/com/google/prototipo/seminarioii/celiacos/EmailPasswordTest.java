@@ -1,4 +1,4 @@
-package com.google.firebase.quickstart.auth;
+package com.google.prototipo.seminarioii.celiacos;
 
 
 import android.support.test.espresso.Espresso;
@@ -76,7 +76,7 @@ public class EmailPasswordTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        // Check that auth failed
+        // Check that celiacos failed
         onView(withText(R.string.auth_failed))
                 .check(matches(isDisplayed()));
     }

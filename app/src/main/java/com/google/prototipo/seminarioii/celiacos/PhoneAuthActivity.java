@@ -1,4 +1,4 @@
-package com.google.firebase.quickstart.auth;
+package com.google.prototipo.seminarioii.celiacos;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -97,7 +97,7 @@ public class PhoneAuthActivity extends AppCompatActivity implements
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
-        // Initialize phone auth callbacks
+        // Initialize phone celiacos callbacks
         // [START phone_auth_callbacks]
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 

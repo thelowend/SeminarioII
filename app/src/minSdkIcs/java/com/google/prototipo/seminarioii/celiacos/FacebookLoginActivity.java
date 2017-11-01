@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.firebase.quickstart.auth;
+package com.google.prototipo.seminarioii.celiacos;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

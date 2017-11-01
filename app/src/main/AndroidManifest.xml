@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.firebase.quickstart.auth">
+    package="com.google.prototipo.seminarioii.celiacos">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChooserActivity">
+        <activity android:name="com.google.prototipo.seminarioii.celiacos.ChooserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,29 +18,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CustomAuthActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.CustomAuthActivity"
             android:label="@string/label_custom_auth" />
         <activity
-            android:name=".GoogleSignInActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
         <activity
-            android:name=".FacebookLoginActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
         <activity
-            android:name=".EmailPasswordActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.EmailPasswordActivity"
             android:label="@string/label_emailpassword"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".PhoneAuthActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.PhoneAuthActivity"
             android:label="@string/label_phone_auth"></activity>
         <activity
-            android:name=".AnonymousAuthActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.AnonymousAuthActivity"
             android:label="@string/label_anonymous_auth" />
         <activity
-            android:name=".TwitterLoginActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.TwitterLoginActivity"
             android:label="@string/label_twitter_login" />
         <activity
-            android:name=".FirebaseUIActivity"
+            android:name="com.google.prototipo.seminarioii.celiacos.FirebaseUIActivity"
             android:label="@string/label_firebase_ui" />
     </application>
 

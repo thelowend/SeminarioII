@@ -1,4 +1,4 @@
-package com.google.firebase.quickstart.auth;
+package com.google.prototipo.seminarioii.celiacos;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
