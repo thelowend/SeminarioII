@@ -4,13 +4,20 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.google.prototipo.seminarioii.celiacos.ChooserActivity">
+        <activity android:name=".ChooserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,30 +25,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.CustomAuthActivity"
+            android:name=".CustomAuthActivity"
             android:label="@string/label_custom_auth" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.GoogleSignInActivity"
+            android:name=".GoogleSignInActivity"
             android:label="@string/label_google_sign_in" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.FacebookLoginActivity"
+            android:name=".FacebookLoginActivity"
             android:label="@string/label_facebook_login" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.EmailPasswordActivity"
+            android:name=".EmailPasswordActivity"
             android:label="@string/label_emailpassword"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.PhoneAuthActivity"
-            android:label="@string/label_phone_auth"></activity>
+            android:name=".PhoneAuthActivity"
+            android:label="@string/label_phone_auth" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.AnonymousAuthActivity"
+            android:name=".AnonymousAuthActivity"
             android:label="@string/label_anonymous_auth" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.TwitterLoginActivity"
+            android:name=".TwitterLoginActivity"
             android:label="@string/label_twitter_login" />
         <activity
-            android:name="com.google.prototipo.seminarioii.celiacos.FirebaseUIActivity"
+            android:name=".FirebaseUIActivity"
             android:label="@string/label_firebase_ui" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".TestMapsActivity"
+            android:label="@string/label_maps_ui"></activity>
     </application>
 
 </manifest>

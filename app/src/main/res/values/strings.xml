@@ -25,6 +25,9 @@
     <string name="label_firebase_ui">FirebaseUI Auth</string>
     <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
 
+    <string name="label_maps_ui">Mapa Celíacos</string>
+    <string name="desc_maps_ui">Mapa de Google</string>
+
     <string name="hint_user_id">User ID</string>
     <string name="get_custom_token">Get Token</string>
     <string name="sign_in">Sign In</string>
@@ -74,4 +77,5 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
+
 </resources>

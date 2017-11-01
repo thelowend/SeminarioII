@@ -43,6 +43,7 @@ import android.widget.TextView;
 public class ChooserActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final Class[] CLASSES = new Class[]{
+            //Auth Activities
             GoogleSignInActivity.class,
             FacebookLoginActivity.class,
             TwitterLoginActivity.class,
@@ -50,7 +51,9 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             PhoneAuthActivity.class,
             AnonymousAuthActivity.class,
             FirebaseUIActivity.class,
-            CustomAuthActivity.class
+            CustomAuthActivity.class,
+            //Map Activity
+            TestMapsActivity.class
     };
 
     private static final int[] DESCRIPTION_IDS = new int[] {
@@ -62,6 +65,7 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             R.string.desc_anonymous_auth,
             R.string.desc_firebase_ui,
             R.string.desc_custom_auth,
+            R.string.desc_maps_ui
     };
 
     @Override
