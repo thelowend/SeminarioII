@@ -17,13 +17,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChooserActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ChooserActivity" />
         <activity
             android:name=".CustomAuthActivity"
             android:label="@string/label_custom_auth" />
@@ -63,7 +65,7 @@
 
         <activity
             android:name=".TestMapsActivity"
-            android:label="@string/label_maps_ui"></activity>
+            android:label="@string/label_maps_ui" />
     </application>
 
 </manifest>
