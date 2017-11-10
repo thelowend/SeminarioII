@@ -1,15 +1,14 @@
 package com.google.prototipo.seminarioii.celiacos;
 
-/**
- * Created by Mauricio on 8/11/2017.
- */
-
 public class Review {
 
 
-    String nombre;
-    String texto;
-    float estrellas;
+    private String nombre;
+    private String texto;
+    private float estrellas;
+
+    public Review() {
+    }
 
     public  Review (String nombre, String texto, float estrellas)
     {
@@ -19,4 +18,27 @@ public class Review {
     }
 
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public float getEstrellas() {
+        return estrellas;
+    }
+
+    public void setEstrellas(float estrellas) {
+        this.estrellas = estrellas;
+    }
 }

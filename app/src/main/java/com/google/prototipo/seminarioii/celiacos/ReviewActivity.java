@@ -28,31 +28,22 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-
-
-
         TableLayout tl = (TableLayout) findViewById(R.id.table1);
 
         Bundle parametros = this.getIntent().getExtras();
 
-
-
-
         if (parametros != null)
         {
-
             row = new TableRow(this);
             row.setId(10);
             row.setBackgroundColor(Color.WHITE);        // part1
-            row.setLayoutParams(new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-        String a = parametros.getString("texto");
+            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            String a = parametros.getString("texto");
             TextView label_hello = new TextView(this);
             label_hello.setId(20);
             label_hello.setText(a);
             label_hello.setTextColor(Color.BLUE);          // part2
-       //     label_hello.setInputType(1);
+            //     label_hello.setInputType(1);
 
             row.addView(label_hello);// add the column to the table row here
 
@@ -63,30 +54,15 @@ public class ReviewActivity extends AppCompatActivity {
 
             row.addView(label_android); // add the column to the table row here
             tl.addView(row);
-
-
-
-
-
         }
-
-
-        }
-
-
-
-
-
-
-
-    public void onClick (View v)
-    {
-
-   Intent intent = new Intent(this, TextoActivity.class);
-    startActivity(intent);
-
-
     }
 
 
+    
+
+    public void onClick (View v)
+    {
+        Intent intent = new Intent(this, TextoActivity.class);
+        startActivity(intent);
+    }
 }
