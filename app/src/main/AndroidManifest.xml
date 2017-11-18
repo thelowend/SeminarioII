@@ -66,7 +66,7 @@
             android:name=".TestMapsActivity"
             android:label="@string/label_maps_ui" />
         <activity android:name=".ReviewActivity" />
-        <activity android:name=".TextoActivity"></activity>
+        <activity android:name=".AgregarReviewActivity"></activity>
     </application>
 
 </manifest>
