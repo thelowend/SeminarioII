@@ -53,7 +53,8 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             FirebaseUIActivity.class,
             CustomAuthActivity.class,
             //Map Activity
-            TestMapsActivity.class
+            //TestMapsActivity.class
+            ReviewActivity.class,
     };
 
     private static final int[] DESCRIPTION_IDS = new int[] {

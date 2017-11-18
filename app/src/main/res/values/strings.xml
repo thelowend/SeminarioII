@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Celíacos Seminario II - Autenticación</string>
+    <string name="app_name">Celíacos Seminario II</string>
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Usar Google Sign In</string>
@@ -77,5 +77,12 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
+
+    <!-- Reviews -->
+    <string name="review_activity">Reviews</string>
+    <string name="agregar_review_activity">Agregar review</string>
+    <string name="label_gracias_review">Gracias por puntuarnos, agregue aqui todo lo que quiera</string>
+    <string name="label_puntaje_promedio_review">Puntaje promedio</string>
+
 
 </resources>
