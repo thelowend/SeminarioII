@@ -52,7 +52,6 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             AnonymousAuthActivity.class,
             FirebaseUIActivity.class,
             CustomAuthActivity.class,
-            UserProfileActivity.class,
             //Map Activity
             TestMapsActivity.class
     };
