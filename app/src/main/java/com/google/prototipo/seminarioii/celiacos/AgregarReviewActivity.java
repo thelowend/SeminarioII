@@ -3,7 +3,9 @@ package com.google.prototipo.seminarioii.celiacos;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,11 +15,19 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.prototipo.seminarioii.celiacos.reviews.entities.ReviewQuestion;
 import com.google.prototipo.seminarioii.celiacos.reviews.entities.UserReview;
+
+import com.google.gson.Gson;
+import com.google.prototipo.seminarioii.celiacos.reviews.entities.ReviewQuestion;
+import com.google.prototipo.seminarioii.celiacos.reviews.entities.UserReview;
+import com.google.prototipo.seminarioii.celiacos.reviews.entities.UserReviewQuestion;
+
 import com.google.prototipo.seminarioii.celiacos.reviews.enums.TiposOpciones;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +51,7 @@ public class AgregarReviewActivity extends AppCompatActivity {
     private EditText comentario;
     private List<ReviewQuestion> reviews = new ArrayList<>();
 
-    private Map<ReviewQuestion, Float> userReviews = new HashMap<>();
+    private List<UserReviewQuestion> userReviewQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +119,6 @@ public class AgregarReviewActivity extends AppCompatActivity {
     }
 
     public void finish(View view){
-        //Aca obtenemos todas los rates que va cargando y el comentario final para pasarlo
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("userReviews");
@@ -117,12 +126,23 @@ public class AgregarReviewActivity extends AppCompatActivity {
         UserReview userReview = new UserReview();
         userReview.setComentario(comentario.getText().toString());
         userReview.setEstablecimientoId(establecimientoId);
+
       //  userReview.setReviews(userReviews);
         userReview.setUserId(0);
-        myRef.setValue(userReview);
+       // myRef.setValue(userReview);
 
 
         Log.i("Creando user review", userReview.toString());
+
+        userReview.setQuestionsReviews(userReviewQuestions);
+        userReview.setFecha(Calendar.getInstance().getTime());
+        userReview.setUserId(0);
+
+        myRef.child(String.valueOf(userReview.getEstablecimientoId())).push().setValue(userReview);
+
+        Log.i("Creando user review", userReview.toString());
+
+
         finish();
     }
 
@@ -135,21 +155,28 @@ public class AgregarReviewActivity extends AppCompatActivity {
 
         promedio += puntaje;
 
-        userReviews.put(reviews.get(contador), puntaje);
+        userReviewQuestions.add(new UserReviewQuestion(reviews.get(contador-1), puntaje));
         calcular();
     }
 
     public void rateSi(View view){
+        float puntaje;
         if(reviews.get(contador).getTipo() == TiposOpciones.SINO)
-            promedio += 5;
+            puntaje = 5;
         else
-            promedio += 1;
+            puntaje = 1;
 
+        promedio += puntaje;
+
+        userReviewQuestions.add(new UserReviewQuestion(reviews.get(contador-1), puntaje));
         calcular();
     }
 
     public void rateRatingBar(View view){
-        promedio += getRatingBar().getRating();
+        float puntaje = getRatingBar().getRating();
+        promedio += puntaje;
+
+        userReviewQuestions.add(new UserReviewQuestion(reviews.get(contador-1), puntaje));
         calcular();
     }
 
@@ -171,8 +198,8 @@ public class AgregarReviewActivity extends AppCompatActivity {
 
         reviews.add(new ReviewQuestion("¿Tiene Contaminacion cruzada?", TiposOpciones.SINOINVERTIDO, mapSiNoInvertido));
         reviews.add(new ReviewQuestion("poseen variedad de platos para celiacos", TiposOpciones.SINO, mapSiNo));
-        reviews.add(new ReviewQuestion("Restaurante", TiposOpciones.ESTRELLAS, mapEstrella));
-        reviews.add(new ReviewQuestion("Comida", TiposOpciones.ESTRELLAS, mapEstrella));
+        //reviews.add(new ReviewQuestion("Restaurante", TiposOpciones.ESTRELLAS, mapEstrella));
+        //reviews.add(new ReviewQuestion("Comida", TiposOpciones.ESTRELLAS, mapEstrella));
         reviews.add(new ReviewQuestion("Atencion", TiposOpciones.ESTRELLAS, mapEstrella));
     }
 
