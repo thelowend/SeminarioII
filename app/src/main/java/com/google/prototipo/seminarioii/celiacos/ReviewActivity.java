@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,6 +45,11 @@ public class ReviewActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     Calendar calendar;
     UserReview test;
+    RatingBar ratingGral;
+    TextView nombreResto;
+
+    int contador;
+    float punt;
 
     List<UserReview> reviews = new ArrayList<>();
     ListView userReviews;
@@ -56,13 +62,19 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         userReviews = findViewById(R.id.userReviews);
+        ratingGral = findViewById(R.id.ratingGral);
+        nombreResto = findViewById(R.id.nombreResto);
+
+        nombreResto.setText("Hotel Campero");
 
         //Get datasnapshot at your "UserReviews/$establecimientoId" root node
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("userReviews").child(String.valueOf(establecimientoId));
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("userReviews");//.child(String.valueOf(establecimientoId));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (final DataSnapshot child : dataSnapshot.getChildren()) {
+                reviews.clear();
+                for (final DataSnapshot child : dataSnapshot.child(String.valueOf(establecimientoId)).getChildren()) {
+
                     UserReview userReview = new UserReview();
                     userReview.setEstablecimientoId((String) child.child("establecimientoId").getValue());
                     userReview.setComentario((String) child.child("comentario").getValue());
@@ -70,7 +82,10 @@ public class ReviewActivity extends AppCompatActivity {
                     userReview.setUserId((String) child.child("userId").getValue());
                     userReview.setPuntaje((String) child.child("puntaje").getValue());
                     reviews.add(userReview);
+                    contador = contador + 1;
+                    punt = punt + Float.parseFloat(userReview.getPuntaje());
                 }
+                ratingGral.setRating(punt / contador);
             }
 
             @Override
@@ -79,8 +94,11 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
+
+
         ListAdapter adapter = new AdapterReview(this, reviews);
         userReviews.setAdapter(adapter);
+
 
     }
 

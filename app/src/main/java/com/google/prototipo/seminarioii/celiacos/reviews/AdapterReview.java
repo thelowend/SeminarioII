@@ -56,6 +56,7 @@ public class AdapterReview extends BaseAdapter{
 
         View v = convertView;
 
+
         if(convertView == null){
             LayoutInflater inf = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inf.inflate(R.layout.review, null);
@@ -64,14 +65,14 @@ public class AdapterReview extends BaseAdapter{
         UserReview userReview = items.get(position);
 
         TextView nombre = (TextView) v.findViewById(R.id.nombre);
-        nombre.setText("Juan Pablo Catena");//userReview.getUserId().getNombre();
+        nombre.setText(userReview.getUserId());//userReview.getUserId().getNombre();
 
         EditText comentario = (EditText) v.findViewById(R.id.comentario);
         comentario.setText(userReview.getComentario());
-
+        comentario.setEnabled(false);
         RatingBar puntaje = v.findViewById(R.id.puntaje_review);
-        if(userReview.getQuestionsReviews() != null && !userReview.getQuestionsReviews().isEmpty())
-        puntaje.setRating(Float.parseFloat(userReview.getPuntaje()));
+        if(userReview.getPuntaje() !=null)
+            puntaje.setRating(Float.parseFloat(userReview.getPuntaje()));
 
         TextView fecha = v.findViewById(R.id.fecha);
         fecha.setText(userReview.getFecha());

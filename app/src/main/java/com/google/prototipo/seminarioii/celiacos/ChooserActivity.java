@@ -44,16 +44,16 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
 
     private static final Class[] CLASSES = new Class[]{
             //Auth Activities
-            GoogleSignInActivity.class,
+           // GoogleSignInActivity.class,
             FacebookLoginActivity.class,
-            TwitterLoginActivity.class,
+            //TwitterLoginActivity.class,
             EmailPasswordActivity.class,
             PhoneAuthActivity.class,
             AnonymousAuthActivity.class,
             FirebaseUIActivity.class,
             CustomAuthActivity.class,
             //Map Activity
-            //TestMapsActivity.class
+            TestMapsActivity.class,
             ReviewActivity.class,
     };
 

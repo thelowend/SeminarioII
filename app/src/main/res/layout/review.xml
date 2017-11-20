@@ -55,19 +55,6 @@
         app:layout_constraintStart_toEndOf="@+id/puntaje_review"
         app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
-    <ImageButton
-        android:id="@+id/likeReview"
-        android:layout_width="21dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toEndOf="@+id/nombre"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/boton_redondo" />
-
     <EditText
         android:id="@+id/comentario"
         android:layout_width="307dp"
@@ -76,6 +63,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

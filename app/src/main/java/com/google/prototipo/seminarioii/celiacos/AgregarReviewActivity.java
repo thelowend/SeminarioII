@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,6 +39,7 @@ public class AgregarReviewActivity extends AppCompatActivity {
     private int contador;
     private TextView pregunta;
     private TextView paginas;
+    FirebaseAuth mAuth;
 
     private RatingBar ratingBar;
 
@@ -122,12 +124,14 @@ public class AgregarReviewActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("userReviews");
+        mAuth = FirebaseAuth.getInstance();
+
 
         UserReview userReview = new UserReview();
         userReview.setComentario(comentario.getText().toString());
         userReview.setEstablecimientoId(establecimientoId);
         userReview.setPuntaje(String.valueOf(promedio / userReviewQuestions.size()));
-        userReview.setUserId("0");
+        userReview.setUserId(mAuth.getCurrentUser().getEmail());
         userReview.setQuestionsReviews(userReviewQuestions);
         userReview.setFecha(Calendar.getInstance().getTime().toString());
 
