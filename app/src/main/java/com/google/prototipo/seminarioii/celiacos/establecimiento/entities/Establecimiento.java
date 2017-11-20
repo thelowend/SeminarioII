@@ -1,17 +1,14 @@
-package com.google.prototipo.seminarioii.celiacos.reviews.entities;
+package com.google.prototipo.seminarioii.celiacos.establecimiento.entities;
 
-/**
- * Created by Mauricio on 19/11/2017.
- */
 
-public class Establecimientos {
+public class Establecimiento {
 
     private String longitud;
     private String latitud;
     private String nombre;
     private String idEstablecimiento;
 
-    public Establecimientos(String longitud, String latitud, String nombre, String idEstablecimiento) {
+    public Establecimiento(String longitud, String latitud, String nombre, String idEstablecimiento) {
         this.longitud = longitud;
         this.latitud = latitud;
         this.nombre = nombre;

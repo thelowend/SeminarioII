@@ -7,15 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,28 +19,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+import com.google.prototipo.seminarioii.celiacos.establecimiento.entities.Establecimiento;
 import com.google.prototipo.seminarioii.celiacos.reviews.AdapterReview;
 
 import com.google.prototipo.seminarioii.celiacos.reviews.entities.UserReview;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ReviewActivity extends AppCompatActivity {
 
-
-    TableLayout tl;
-    Button b3;
-    TableRow row;
-    TextView puntaje;
-    UserReview value;
-    SimpleDateFormat simpleDateFormat;
-    Calendar calendar;
-    UserReview test;
     RatingBar ratingGral;
     TextView nombreResto;
 
@@ -53,86 +38,68 @@ public class ReviewActivity extends AppCompatActivity {
 
     List<UserReview> reviews = new ArrayList<>();
     ListView userReviews;
-    int establecimientoId = 1;
 
+    Establecimiento establecimiento = null;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
-        userReviews = findViewById(R.id.userReviews);
-        ratingGral = findViewById(R.id.ratingGral);
-        nombreResto = findViewById(R.id.nombreResto);
 
-        nombreResto.setText("Hotel Campero");
+        try {
+            Bundle bundle = getIntent().getExtras();
+            establecimiento = (Establecimiento) (bundle != null ? bundle.get("establecimiento") : new Establecimiento("-0.43","0.43", "Hotel DAuria", "1"));
+            if (establecimiento != null) {
+                userReviews = findViewById(R.id.userReviews);
+                ratingGral = findViewById(R.id.ratingGral);
+                nombreResto = findViewById(R.id.nombreResto);
 
-        //Get datasnapshot at your "UserReviews/$establecimientoId" root node
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("userReviews");//.child(String.valueOf(establecimientoId));
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                reviews.clear();
-                for (final DataSnapshot child : dataSnapshot.child(String.valueOf(establecimientoId)).getChildren()) {
+                nombreResto.setText(establecimiento.getNombre());
 
-                    UserReview userReview = new UserReview();
-                    userReview.setEstablecimientoId((String) child.child("establecimientoId").getValue());
-                    userReview.setComentario((String) child.child("comentario").getValue());
-                    userReview.setFecha((String) child.child("fecha").getValue());
-                    userReview.setUserId((String) child.child("userId").getValue());
-                    userReview.setPuntaje((String) child.child("puntaje").getValue());
-                    reviews.add(userReview);
-                    contador = contador + 1;
-                    punt = punt + Float.parseFloat(userReview.getPuntaje());
-                }
-                ratingGral.setRating(punt / contador);
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("userReviews").child(String.valueOf(establecimiento.getIdEstablecimiento()));
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        reviews.clear();
+                        for (final DataSnapshot child : dataSnapshot.getChildren()) {
+                            UserReview userReview = new UserReview();
+                            userReview.setEstablecimientoId((String) child.child("establecimientoId").getValue());
+                            userReview.setComentario((String) child.child("comentario").getValue());
+                            userReview.setFecha((String) child.child("fecha").getValue());
+                            userReview.setUserId((String) child.child("userId").getValue());
+                            userReview.setPuntaje((String) child.child("puntaje").getValue());
+                            reviews.add(userReview);
+                            contador = contador + 1;
+                            punt = punt + Float.parseFloat(userReview.getPuntaje());
+                        }
+                        ratingGral.setRating(punt / contador);
+                        ListAdapter adapter = new AdapterReview(ReviewActivity.this, reviews);
+                        userReviews.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("Nueva user review", "Failed to read value.", databaseError.toException());
+                    }
+                });
+
+                ListAdapter adapter = new AdapterReview(this, reviews);
+                userReviews.setAdapter(adapter);
+
+
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Nueva user review", "Failed to read value.", databaseError.toException());
-            }
-        });
-
-
-
-        ListAdapter adapter = new AdapterReview(this, reviews);
-        userReviews.setAdapter(adapter);
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onClick (View v)
     {
         Intent intent = AgregarReviewActivity.makeIntent(ReviewActivity.this);
-        intent.putExtra("establecimiento", "Hotel campero");
-        intent.putExtra("establecimientoId", "1");
+        intent.putExtra("establecimiento", establecimiento.getNombre());
+        intent.putExtra("establecimientoId", establecimiento.getIdEstablecimiento());
         startActivity(intent);
     }
-
-
-   public void getReviews() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("userReviews");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                value = dataSnapshot.getValue(UserReview.class);
-                //puntaje.setText(value.getComentario());
-
-                Log.d("Nueva user review", "La nueva user review es: " + value);
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Nueva user review", "Failed to read value.", databaseError.toException());
-            }
-        });
-
-
-    }
-
 
 }
