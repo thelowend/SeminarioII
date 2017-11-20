@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class AgregarReviewActivity extends AppCompatActivity {
 
-    private int establecimientoId;
+    private String establecimientoId;
     private int contador;
     private TextView pregunta;
     private TextView paginas;
@@ -71,7 +71,7 @@ public class AgregarReviewActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             establecimiento.setText((String) getIntent().getExtras().getSerializable("establecimiento"));
-            establecimientoId = getIntent().getExtras().getInt("establecimientoId");
+            establecimientoId = (String) getIntent().getExtras().getSerializable("establecimientoId");
         }
         comentario.setVisibility(View.INVISIBLE);
         boton_finalizar.setVisibility(View.INVISIBLE);
@@ -126,25 +126,19 @@ public class AgregarReviewActivity extends AppCompatActivity {
         UserReview userReview = new UserReview();
         userReview.setComentario(comentario.getText().toString());
         userReview.setEstablecimientoId(establecimientoId);
-
-      //  userReview.setReviews(userReviews);
-        userReview.setUserId(0);
-       // myRef.setValue(userReview);
-
-
-        Log.i("Creando user review", userReview.toString());
-
+        userReview.setPuntaje(String.valueOf(promedio / userReviewQuestions.size()));
+        userReview.setUserId("0");
         userReview.setQuestionsReviews(userReviewQuestions);
-        userReview.setFecha(Calendar.getInstance().getTime());
-        userReview.setUserId(0);
+        userReview.setFecha(Calendar.getInstance().getTime().toString());
 
         myRef.child(String.valueOf(userReview.getEstablecimientoId())).push().setValue(userReview);
 
         Log.i("Creando user review", userReview.toString());
 
-
         finish();
     }
+
+
 
     public void rateNo(View view){
         float puntaje;

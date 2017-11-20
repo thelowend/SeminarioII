@@ -1,33 +1,33 @@
 package com.google.prototipo.seminarioii.celiacos.reviews.entities;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class UserReview {
 
-    private int establecimientoId;
+    private String establecimientoId;
     private List<UserReviewQuestion> questionsReviews;
     private String comentario;
-    private int userId;
-    private Date fecha;
+    private String userId;
+    private String fecha;
+    private String puntaje;
 
     public UserReview() {
     }
 
-    public UserReview(int establecimientoId, List<UserReviewQuestion> questionsReviews, String comentario, int userId, Date fecha) {
+    public UserReview(String establecimientoId, List<UserReviewQuestion> questionsReviews, String comentario, String userId, String fecha, String puntaje) {
         this.establecimientoId = establecimientoId;
         this.questionsReviews = questionsReviews;
         this.comentario = comentario;
         this.userId = userId;
         this.fecha = fecha;
+        this.puntaje = puntaje;
     }
 
-    public int getEstablecimientoId() {
+    public String getEstablecimientoId() {
         return establecimientoId;
     }
 
-    public void setEstablecimientoId(int establecimientoId) {
+    public void setEstablecimientoId(String establecimientoId) {
         this.establecimientoId = establecimientoId;
     }
 
@@ -39,19 +39,19 @@ public class UserReview {
         this.comentario = comentario;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -61,6 +61,14 @@ public class UserReview {
 
     public void setQuestionsReviews(List<UserReviewQuestion> questionsReviews) {
         this.questionsReviews = questionsReviews;
+    }
+
+    public String getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(String puntaje) {
+        this.puntaje = puntaje;
     }
 }
 

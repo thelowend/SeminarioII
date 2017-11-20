@@ -12,10 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -34,9 +30,9 @@ import com.google.prototipo.seminarioii.celiacos.reviews.entities.UserReview;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class ReviewActivity extends AppCompatActivity {
 
 
@@ -59,35 +55,22 @@ public class ReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
-
-        puntaje = findViewById(R.id.puntaje);
-
-        //getReviews();
-        obtenerFecha();
         userReviews = findViewById(R.id.userReviews);
 
-        test = new UserReview();
-        test.setComentario("Prueba");
-        test.setEstablecimientoId(1);
-
-
-        test.setFecha(calendar.getTime());
-        test.setUserId(1);
-
-        reviews.add(test);
-
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("userReviews").child(String.valueOf(establecimientoId));
-
+        //Get datasnapshot at your "UserReviews/$establecimientoId" root node
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("userReviews").child(String.valueOf(establecimientoId));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                test.setFecha(calendar.getTime());
-                test.setComentario(dataSnapshot.child("-KzKgSKE_-DNCamYc6vr").child("comentario").getValue().toString());
-
-
+                for (final DataSnapshot child : dataSnapshot.getChildren()) {
+                    UserReview userReview = new UserReview();
+                    userReview.setEstablecimientoId((String) child.child("establecimientoId").getValue());
+                    userReview.setComentario((String) child.child("comentario").getValue());
+                    userReview.setFecha((String) child.child("fecha").getValue());
+                    userReview.setUserId((String) child.child("userId").getValue());
+                    userReview.setPuntaje((String) child.child("puntaje").getValue());
+                    reviews.add(userReview);
+                }
             }
 
             @Override
@@ -97,10 +80,7 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
         ListAdapter adapter = new AdapterReview(this, reviews);
-        reviews.add(test);
         userReviews.setAdapter(adapter);
-
-
 
     }
 
@@ -108,7 +88,7 @@ public class ReviewActivity extends AppCompatActivity {
     {
         Intent intent = AgregarReviewActivity.makeIntent(ReviewActivity.this);
         intent.putExtra("establecimiento", "Hotel campero");
-        intent.putExtra("establecimientoId", 1);
+        intent.putExtra("establecimientoId", "1");
         startActivity(intent);
     }
 
@@ -133,19 +113,6 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    public void obtenerFecha() {
-
-        simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
-
-        calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR, 17);
-        calendar.set(Calendar.MINUTE, 30);
-        calendar.set(Calendar.SECOND, 2);
 
     }
 

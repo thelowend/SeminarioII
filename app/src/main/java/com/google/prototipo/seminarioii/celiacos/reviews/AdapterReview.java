@@ -71,21 +71,11 @@ public class AdapterReview extends BaseAdapter{
 
         RatingBar puntaje = v.findViewById(R.id.puntaje_review);
         if(userReview.getQuestionsReviews() != null && !userReview.getQuestionsReviews().isEmpty())
-        puntaje.setRating(getPuntaje(userReview.getQuestionsReviews()));
-
-        //ImageView foto = (ImageView) v.findViewById(R.id.foto);
-        //foto.setBackground(n);
+        puntaje.setRating(Float.parseFloat(userReview.getPuntaje()));
 
         TextView fecha = v.findViewById(R.id.fecha);
-        fecha.setText(userReview.getFecha().toString());
+        fecha.setText(userReview.getFecha());
 
         return v;
-    }
-
-    private float getPuntaje(List<UserReviewQuestion> reviews){
-        float puntaje = 0f;
-        for (UserReviewQuestion reviewQuestion : reviews)
-            puntaje += reviewQuestion.getPuntaje();
-        return puntaje;
     }
 }
